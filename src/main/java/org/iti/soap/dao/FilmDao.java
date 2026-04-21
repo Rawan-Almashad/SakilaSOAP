@@ -29,8 +29,13 @@ public class FilmDao {
         }
     }
     public Optional<Film> findById(Short id) {
-        EntityManager em= JPAUtil.getEntityManagerFactory().createEntityManager();
-        return Optional.ofNullable(em.find(Film.class,id));
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            return Optional.ofNullable(em.find(Film.class, id));
+        }
+        finally {
+            em.close();
+        }
     }
     public List<Film> findAll(){
         EntityManager em= JPAUtil.getEntityManagerFactory().createEntityManager();
