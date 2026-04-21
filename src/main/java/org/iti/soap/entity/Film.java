@@ -50,7 +50,6 @@ public class Film {
     @Column(name = "rating", columnDefinition = "enum('G','PG','PG-13','R','NC-17')")
     private String rating;
 
-    // 🔥 FIX: SET type, not LOB
     @Column(name = "special_features", columnDefinition = "set('Trailers','Commentaries','Deleted Scenes','Behind the Scenes')")
     private String specialFeatures;
 
