@@ -7,4 +7,9 @@
             implementation="org.iti.soap.ws.LanguageWebService"
             url-pattern="/ws/language"/>
 
+    <endpoint
+            name="FilmServices"
+            implementation="org.iti.soap.ws.FilmWebService"
+            url-pattern="/ws/film"/>
+
 </endpoints>
