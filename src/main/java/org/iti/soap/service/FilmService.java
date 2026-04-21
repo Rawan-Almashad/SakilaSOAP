@@ -1,8 +1,14 @@
 package org.iti.soap.service;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
+import org.iti.soap.config.JPAUtil;
 import org.iti.soap.dao.FilmDao;
+import org.iti.soap.dto.AddActorToFilmRequest;
 import org.iti.soap.dto.CreateFilmRequest;
+import org.iti.soap.entity.Actor;
 import org.iti.soap.entity.Film;
+import org.iti.soap.entity.FilmActorId;
 import org.iti.soap.entity.Language;
 import org.iti.soap.exception.LanguageNotFound;
 import org.iti.soap.factory.ServiceFactory;
@@ -34,5 +40,9 @@ public class FilmService {
         {
           return filmDao.findWithLanguage(id);
         }
+        public void addActorToFilm(AddActorToFilmRequest request)
+         {
+                 filmDao.addActorToFilm(request);
+         }
     }
 

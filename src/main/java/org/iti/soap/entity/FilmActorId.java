@@ -10,10 +10,10 @@ public class FilmActorId implements Serializable {
 
     private static final long serialVersionUID = 1313131672564555260L;
 
-    @Column(name = "actor_id", columnDefinition = "smallint unsigned", nullable = false)  // ✅ Clean syntax
+    @Column(name = "actor_id", columnDefinition = "smallint unsigned", nullable = false)
     private Short actorId;
 
-    @Column(name = "film_id", columnDefinition = "smallint unsigned", nullable = false)  // ✅ Clean syntax
+    @Column(name = "film_id", columnDefinition = "smallint unsigned", nullable = false)
     private Short filmId;
 
     // Default constructor required by JPA

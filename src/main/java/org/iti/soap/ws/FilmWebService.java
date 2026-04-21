@@ -2,6 +2,7 @@ package org.iti.soap.ws;
 
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
+import org.iti.soap.dto.AddActorToFilmRequest;
 import org.iti.soap.dto.CreateFilmRequest;
 import org.iti.soap.entity.Film;
 import org.iti.soap.entity.Language;
@@ -56,5 +57,10 @@ public class FilmWebService {
     @WebMethod
     public void deleteFilm(Short id) {
         filmService.delete(id);
+    }
+    @WebMethod
+    public void addActorToFilm(AddActorToFilmRequest request)
+    {
+        filmService.addActorToFilm(request);
     }
 }

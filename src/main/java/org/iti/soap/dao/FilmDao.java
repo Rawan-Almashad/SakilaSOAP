@@ -2,8 +2,13 @@ package org.iti.soap.dao;
 
 import jakarta.persistence.EntityManager;
 import org.iti.soap.config.JPAUtil;
+import org.iti.soap.dto.AddActorToFilmRequest;
+import org.iti.soap.entity.Actor;
 import org.iti.soap.entity.Film;
+import org.iti.soap.entity.FilmActor;
+import org.iti.soap.entity.FilmActorId;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.jar.JarOutputStream;
@@ -66,5 +71,37 @@ public class FilmDao {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         return (Film) em.createQuery("select f from Film f join fetch f.language where f.filmId =:id").setParameter("id",id)
                 .getSingleResult();
+    }
+    public void addActorToFilm(AddActorToFilmRequest request)
+    {
+        EntityManager em= JPAUtil.getEntityManagerFactory().createEntityManager();
+        try{
+            em.getTransaction().begin();
+            Actor actor=em.find(Actor.class,request.getActorId());
+            Film film= em.find(Film.class,request.getFilmId());
+            if(actor==null||film==null)
+                throw new RuntimeException("Actor or Film not found");
+            FilmActorId id= new FilmActorId(request.getActorId(), request.getFilmId());
+            if(em.find(FilmActor.class,id)!=null)
+                throw new RuntimeException("Actor already is registered in the film");
+            FilmActor filmActor =new FilmActor();
+            filmActor.setId(id);
+            filmActor.setActor(actor);
+            filmActor.setFilm(film);
+            filmActor.setLastUpdate(Instant.now());
+            em.persist(filmActor);
+            em.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            if(em.getTransaction().isActive())
+                em.getTransaction().rollback();
+            e.printStackTrace();
+            throw new RuntimeException("Couldn't add actor to film "+ e.getMessage());
+
+        }
+        finally {
+            em.close();
+        }
     }
 }
