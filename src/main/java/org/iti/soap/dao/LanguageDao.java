@@ -19,7 +19,6 @@ public class LanguageDao {
             Language language =em.find(Language.class,id);
             return Optional.ofNullable(language);
         }finally {
-            // Always close to release DB connection
             em.close();
         }
     }
