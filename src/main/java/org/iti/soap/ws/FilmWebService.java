@@ -4,6 +4,7 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebService;
 import org.iti.soap.dto.AddActorToFilmRequest;
 import org.iti.soap.dto.CreateFilmRequest;
+import org.iti.soap.dto.ReturnFilm;
 import org.iti.soap.entity.Film;
 import org.iti.soap.entity.Language;
 import org.iti.soap.exception.LanguageNotFound;
@@ -21,7 +22,7 @@ public class FilmWebService {
     private FilmService filmService = ServiceFactory.getFilmService();
 
     @WebMethod
-    public Film getFilmById(Short id) {
+    public ReturnFilm getFilmById(Short id) {
         return filmService.findById(id);
     }
 

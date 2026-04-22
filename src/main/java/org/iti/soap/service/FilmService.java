@@ -6,6 +6,7 @@ import org.iti.soap.config.JPAUtil;
 import org.iti.soap.dao.FilmDao;
 import org.iti.soap.dto.AddActorToFilmRequest;
 import org.iti.soap.dto.CreateFilmRequest;
+import org.iti.soap.dto.ReturnFilm;
 import org.iti.soap.entity.Actor;
 import org.iti.soap.entity.Film;
 import org.iti.soap.entity.FilmActorId;
@@ -26,8 +27,12 @@ public class FilmService {
         public Film create(Film film)  {
             return filmDao.save(film);
         }
-        public Film findById(Short id) {
-           return  filmDao.findById(id).orElseThrow(()-> new RuntimeException("Film not found "));
+        public ReturnFilm findById(Short id) {
+           Film film= filmDao.findById(id).orElseThrow(()-> new RuntimeException("Film not found "));
+           ReturnFilm returnFilm = new ReturnFilm();
+           returnFilm.setDescription(film.getDescription());
+           returnFilm.setTitle(film.getTitle());
+           return returnFilm;
         }
         public List<Film> findAll(){
            return filmDao.findAll();
