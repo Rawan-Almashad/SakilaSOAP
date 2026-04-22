@@ -1,6 +1,7 @@
 package org.iti.soap.entity;
 
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
@@ -15,7 +16,7 @@ public class City {
 
     @Column(name = "city", nullable = false, length = 50)
     private String city;
-
+    @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;

@@ -1,6 +1,7 @@
 package org.iti.soap.entity;
 
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
@@ -12,7 +13,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", columnDefinition = "smallint UNSIGNED not null")
     private Short id;
-
+    @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
@@ -25,7 +26,7 @@ public class Customer {
 
     @Column(name = "email", length = 50)
     private String email;
-
+    @XmlTransient
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;

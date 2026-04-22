@@ -17,7 +17,7 @@ public class LanguageWebService {
             ServiceFactory.getLanguageService();
 
     @WebMethod
-    public Language getLanguageById(@WebParam(name = "Id")short id) throws LanguageNotFound {
+    public Language getLanguageById(short id) throws LanguageNotFound {
         return service.getById(id)
                 .orElseThrow(() -> new LanguageNotFound("Language is not found"));
     }
@@ -28,14 +28,14 @@ public class LanguageWebService {
     }
 
     @WebMethod
-    public Language createLanguage( @WebParam(name = "LanguageName")String name) {
+    public Language createLanguage( String name) {
         Language language = new Language();
         language.setName(name);
         return service.create(language);
     }
 
     @WebMethod
-    public boolean deleteLanguage(@WebParam(name = "Id")short id) {
+    public boolean deleteLanguage(short id) {
         return service.delete(id);
     }
 }

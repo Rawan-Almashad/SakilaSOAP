@@ -13,8 +13,11 @@ import org.iti.soap.service.ActorService;
 
 import java.time.Instant;
 import java.util.List;
-
-@WebService
+@WebService(
+        name = "ActorWebService",
+        serviceName = "ActorWebService",
+        targetNamespace = "http://actor.ws.soap.iti.org/"
+)
 public class ActorWebService {
     private ActorService actorService = ServiceFactory.getActorService();
 
@@ -25,7 +28,7 @@ public class ActorWebService {
         return actorService.create(request);
     }
     @WebMethod
-    public Actor findById(@WebParam(name = "Id")Short id)throws RuntimeException {
+    public Actor findById(Short id)throws RuntimeException {
 
         return actorService.findById(id);
     }
@@ -34,7 +37,7 @@ public class ActorWebService {
         return actorService.findAll();
     }
     @WebMethod
-    public void delete(@WebParam(name = "Id")Short id) {
+    public void delete(Short id) {
         actorService.delete(id);
     }
 }

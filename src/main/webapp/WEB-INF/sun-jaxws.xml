@@ -17,4 +17,9 @@
             implementation="org.iti.soap.ws.ActorWebService"
             url-pattern="/ws/actor"/>
 
+    <endpoint
+            name="CountryServices"
+            implementation="org.iti.soap.ws.CountryWebService"
+            url-pattern="/ws/country"/>
+
 </endpoints>

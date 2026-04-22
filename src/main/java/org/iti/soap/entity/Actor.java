@@ -1,10 +1,14 @@
 package org.iti.soap.entity;
 
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
-
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "actor")
 public class Actor {
