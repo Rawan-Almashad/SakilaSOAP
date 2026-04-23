@@ -1,13 +1,7 @@
 package org.iti.soap.factory;
 
-import org.iti.soap.dao.ActorDao;
-import org.iti.soap.dao.CountryDao;
-import org.iti.soap.dao.FilmDao;
-import org.iti.soap.dao.LanguageDao;
-import org.iti.soap.service.ActorService;
-import org.iti.soap.service.CountryService;
-import org.iti.soap.service.FilmService;
-import org.iti.soap.service.LanguageService;
+import org.iti.soap.dao.*;
+import org.iti.soap.service.*;
 
 public class ServiceFactory {
     private static final LanguageService languageService =
@@ -18,6 +12,8 @@ public class ServiceFactory {
             new ActorService(new ActorDao());
     private static final CountryService countryService =
             new CountryService(new CountryDao());
+    private static final CityService cityService =
+            new CityService(new CityDao(),countryService);
 
     public static LanguageService getLanguageService() {
         return languageService;
@@ -27,4 +23,5 @@ public class ServiceFactory {
     }
     public static ActorService getActorService(){return actorService;}
     public static CountryService getCountryService(){return countryService;}
+    public static CityService getCityService(){return cityService;}
 }
