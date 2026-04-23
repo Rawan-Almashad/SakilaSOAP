@@ -3,14 +3,14 @@ package org.iti.soap.ws;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.persistence.EntityManager;
+import jakarta.xml.ws.RequestWrapper;
+import jakarta.xml.ws.ResponseWrapper;
 import org.iti.soap.dto.CreateActorRequest;
 import org.iti.soap.entity.Actor;
 import org.iti.soap.factory.ServiceFactory;
 import org.iti.soap.service.ActorService;
-
-import java.time.Instant;
 import java.util.List;
+
 @WebService(
         name = "ActorWebService",
         serviceName = "ActorWebService",
@@ -20,22 +20,30 @@ public class ActorWebService {
     private ActorService actorService = ServiceFactory.getActorService();
 
     @WebMethod
-    public Actor create(CreateActorRequest request)
-    {
-
+    @RequestWrapper(className = "org.iti.soap.ws.jaxws.CreateActor")
+    @ResponseWrapper(className = "org.iti.soap.ws.jaxws.CreateActorResponse")
+    public Actor create(@WebParam(name = "request") CreateActorRequest request) {
         return actorService.create(request);
     }
-    @WebMethod
-    public Actor findById(Short id)throws RuntimeException {
 
+    @WebMethod
+    @RequestWrapper(className = "org.iti.soap.ws.jaxws.FindByIdActor")
+    @ResponseWrapper(className = "org.iti.soap.ws.jaxws.FindByIdActorResponse")
+    public Actor findById(@WebParam(name = "id") Short id) throws RuntimeException {
         return actorService.findById(id);
     }
+
     @WebMethod
-    public List<Actor> findAll(){
+    @RequestWrapper(className = "org.iti.soap.ws.jaxws.FindAllActors")
+    @ResponseWrapper(className = "org.iti.soap.ws.jaxws.FindAllActorsResponse")
+    public List<Actor> findAll() {
         return actorService.findAll();
     }
+
     @WebMethod
-    public void delete(Short id) {
+    @RequestWrapper(className = "org.iti.soap.ws.jaxws.DeleteActor")
+    @ResponseWrapper(className = "org.iti.soap.ws.jaxws.DeleteActorResponse")
+    public void delete(@WebParam(name = "id") Short id) {
         actorService.delete(id);
     }
 }

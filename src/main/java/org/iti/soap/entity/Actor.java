@@ -7,8 +7,6 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "actor")
 public class Actor {
