@@ -4,8 +4,6 @@ import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 import jakarta.persistence.EntityManager;
-import org.iti.soap.config.JPAUtil;
-import org.iti.soap.dao.ActorDao;
 import org.iti.soap.dto.CreateActorRequest;
 import org.iti.soap.entity.Actor;
 import org.iti.soap.factory.ServiceFactory;
