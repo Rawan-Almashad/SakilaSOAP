@@ -5,7 +5,18 @@
     <endpoint
             name="LanguageService"
             implementation="org.iti.soap.ws.LanguageWebService"
-            url-pattern="/ws/language"/>
+            url-pattern="/ws/language">
+        <handler-chains xmlns="https://jakarta.ee/xml/ns/jakartaee">
+
+            <handler-chain>
+                <handler>
+                    <handler-class>org.iti.soap.handler.SecurityHandler</handler-class>
+                </handler>
+
+            </handler-chain>
+
+        </handler-chains>
+    </endpoint>
 
     <endpoint
             name="FilmServices"
@@ -21,5 +32,10 @@
             name="CountryServices"
             implementation="org.iti.soap.ws.CountryWebService"
             url-pattern="/ws/country"/>
+
+    <endpoint
+            name="CityServices"
+            implementation="org.iti.soap.ws.CityWebService"
+            url-pattern="/ws/city"/>
 
 </endpoints>
