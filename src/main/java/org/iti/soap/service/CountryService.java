@@ -5,6 +5,7 @@ import org.iti.soap.config.JPAUtil;
 
 import org.iti.soap.dao.CountryDao;
 import org.iti.soap.dto.CreateCountry;
+import org.iti.soap.dto.UpdateCountryRequest;
 import org.iti.soap.entity.Country;
 
 import java.time.Instant;
@@ -25,16 +26,19 @@ public class CountryService {
       return countryDao.findAll();
     }
 
-    public Country save(CreateCountry request) {
+    public CreateCountry save(CreateCountry request) {
         Country country = new Country();
         country.setLastUpdate(Instant.now());
         country.setCountry(request.getCountry());
         return countryDao.save(country);
     }
 
-    public Country update(Country request) {
-
-       return countryDao.update(request);
+    public CreateCountry update(UpdateCountryRequest request) {
+       Country country =new Country();
+       country.setLastUpdate(Instant.now());
+       country.setCountry(request.getCountry());
+       country.setId(request.getId());
+       return countryDao.update(country);
     }
 
     public boolean deleteById(Short id) {

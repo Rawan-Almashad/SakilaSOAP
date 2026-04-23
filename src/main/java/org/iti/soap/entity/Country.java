@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
@@ -20,6 +21,7 @@ public class Country {
     @Column(name = "country", nullable = false, length = 50)
     private String country;
 
+    @XmlTransient
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;

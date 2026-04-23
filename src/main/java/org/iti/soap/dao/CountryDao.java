@@ -2,6 +2,8 @@ package org.iti.soap.dao;
 
 import jakarta.persistence.EntityManager;
 import org.iti.soap.config.JPAUtil;
+import org.iti.soap.dto.CreateActorRequest;
+import org.iti.soap.dto.CreateCountry;
 import org.iti.soap.entity.Country;
 
 import java.time.Instant;
@@ -32,16 +34,18 @@ public class CountryDao {
         }
     }
 
-    public Country save(Country country) {
+    public CreateCountry save(Country country) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
             em.getTransaction().begin();
 
-            country.setLastUpdate(Instant.now()); // optional (DB also handles it)
+            country.setLastUpdate(Instant.now());
             em.persist(country);
 
             em.getTransaction().commit();
-            return country;
+            CreateCountry returnedCountry=new CreateCountry();
+            returnedCountry.setCountry(country.getCountry());
+            return returnedCountry;
 
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -53,15 +57,15 @@ public class CountryDao {
         }
     }
 
-    public Country update(Country country) {
+    public CreateCountry update(Country country) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         try {
             em.getTransaction().begin();
-
             Country managed = em.merge(country);
-            managed.setLastUpdate(Instant.now());
             em.getTransaction().commit();
-            return managed;
+            CreateCountry returnedCountry=new CreateCountry();
+            returnedCountry.setCountry(country.getCountry());
+            return returnedCountry;
 
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
