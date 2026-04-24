@@ -14,6 +14,14 @@ public class ServiceFactory {
             new CountryService(new CountryDao());
     private static final CityService cityService =
             new CityService(new CityDao(),countryService);
+    private static final StoreService storeService =
+            new StoreService(new StoreDao());
+    private static final StaffService staffService =
+            new StaffService(new StaffDao());
+    private static final CategoryService categoryService =
+            new CategoryService(new CategoryDao());
+    private static final CustomerService customerService =
+            new CustomerService(new CustomerDao());
 
     public static LanguageService getLanguageService() {
         return languageService;
@@ -24,4 +32,10 @@ public class ServiceFactory {
     public static ActorService getActorService(){return actorService;}
     public static CountryService getCountryService(){return countryService;}
     public static CityService getCityService(){return cityService;}
+    public static StoreService getStoreService(){return storeService;}
+    public static StaffService getStaffService(){return staffService;}
+    public static CategoryService getCategoryService(){return categoryService;}
+    public static CustomerService getCustomerService(){return customerService;}
+
+
 }
